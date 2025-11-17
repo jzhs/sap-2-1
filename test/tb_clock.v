@@ -25,8 +25,8 @@ clocken1(
 
 
 initial begin
-//  $dumpfile("top_tb.vcd");
-//  $dumpvars;
+  $dumpfile("top_tb.vcd");
+  $dumpvars;
   sysclk = 0;
   reset = 1;
   #4;

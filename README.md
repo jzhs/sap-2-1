@@ -29,15 +29,26 @@ Sap-1-3 extended sap-1-2 by adding hexadecimal i/o via the onboard
 that I bought.
 
 
-
-
-
 Now its time to move on to the SAP-2.
 
 
 
-# New: SERIAL IO
+# Installation
+Just git clone
 
+Then create a parallel build directory
+
+# Simulations
+cd to build dir
+
+Then ../sap-2-1/tools/sim.bat
+
+
+# Programming board
+
+Use makebits.bat and then prog.bat
+
+# New: SERIAL IO
 
 The first io scheme in sap-1-1 was slider switches and leds on the
 Basys3. This was usable for tiny examples only. The second io scheme
@@ -52,7 +63,8 @@ laptop or desktop. This is similar to programming an Arduino or a
 Basys3 dev board from a pc. On the pc you have a full-featured os with
 text editor and compiler and everything else you need. It can help you
 prepare a program and then transmit it to the target. The point is you
-don't have to actually handle the target. 
+don't have to actually handle the target. This might allow for a wider
+range of dev boards. I wouldn't need any onboard switches, leds, etc. 
 
 The [MB] book talks about serial io that is mostly done in software. A
 large problem is that you have to have particular timing for
