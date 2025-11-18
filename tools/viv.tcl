@@ -43,7 +43,8 @@ if [expr {$op == "sim"}] {
     exec xsim my_snapshot -tclbatch $thisProject/tools/xsim_cfg.tcl
     exec xsim --gui my_snapshot.wdb
 
-} elseif [expr {$op == "synth"}] {
+} elseif [expr {$op == "makebits"}] {
+    # Does synthesis and implementation and bitstream write
     variable top [lindex $argv 1]
     puts "Making bitstream $top"
     read_verilog [glob $thisProject/src/*.v]

@@ -7,9 +7,9 @@ module clocken
 (
   input wire sysclk,
   input wire reset,
-  output reg clken,  // rising slowclk
-  output reg clken2, // falling slowclk
-  output reg slowclk
+  output reg slow_clock, 
+  output reg slow_rise, // rising slowclk
+  output reg slow_fall // falling slowclk
 );
 
 
@@ -17,30 +17,30 @@ module clocken
 // parameter. 
 // Output is a slow clock (eg 1 kHz) with a frequency 
 //    (1/DIVISOR) * sysclk
-// Output clken is a pulse, 1 clock cycle in length, marking
-// the rising edge of slowclk. 
-// Output clken_oop is a pulse, 1 clock cycle in length,
-// marking the falling edge of slowclk.
+// Output slow_rise is a pulse, 1 clock cycle in length, marking
+// the rising edge of slow_clock. 
+// Output slow_fall is a pulse, 1 clock cycle in length,
+// marking the falling edge of slow_clock.
 
 localparam COUNTER_BITS = $clog2(DIVISOR);
 reg [COUNTER_BITS - 1 : 0] count;
 
 
 always @(posedge sysclk) begin
-  if (reset)
-    count = 0;
-  else if (count == DIVISOR-1) begin
-    count <= 0;
-    clken <= 1;
-    slowclk <= 1;
+  if (reset) begin
+     count = 0;
+  end else if (count == DIVISOR-1) begin
+     count <= 0;
+     slow_clock <= 1;
+     slow_rise <= 1;
   end else if (count == (DIVISOR/2)-1) begin
-    slowclk <= 0; 
-    clken2 <= 1;
-    count <= count+1;
+     count <= count+1;
+     slow_clock <= 0; 
+     slow_fall <= 1;
   end else begin
-    count <= count+1;
-    clken <= 0;
-    clken2 <= 0;
+     count <= count+1;
+     slow_rise <= 0;
+     slow_fall <= 0;
   end
 end
 

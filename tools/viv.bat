@@ -1,4 +1,3 @@
-rem viv.bat
 
 @echo off
 

@@ -5,9 +5,10 @@ module tb_clock;
 
 reg sysclk;
 reg reset;
-wire clken;
-wire clken2;  // out-of-phase clock enable
-wire slowclk;
+wire slow_clock;
+wire slow_rise;
+wire slow_fall;  // out-of-phase clock enable
+
 
 localparam CLKLEN = 8;
 
@@ -17,9 +18,9 @@ clocken #(.DIVISOR(CLKLEN))
 clocken1(
    .sysclk(sysclk), 
    .reset(reset),
-   .clken(clken), 
-   .clken2(clken2), 
-   .slowclk(slowclk)
+   .slow_clock(slow_clock),
+   .slow_rise(slow_rise), 
+   .slow_fall(slow_fall)
 );
 
 
