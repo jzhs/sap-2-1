@@ -30,10 +30,33 @@ module uart_top(
    );
 
 
+   debouncer BTNC_DEB
+   (
+    .clock(CLOCK_100MHZ),
+    .clken(clock_1khz_rise),
+    .in(btnC),
+    .out_rise(tx_dv) 
+   );
+
+   debouncer BTNL_DEB
+   (
+    .clock(CLOCK_100MHZ),
+    .clken(clock_1khz_rise),
+    .in(btnL),
+    .out(reset) // reset is a debounced btnL 
+   );
+   
+
+   
    // 100_000_000 / 115200  =  868
 
    wire [7:0]	       rx_byte;
    wire		       rx_dv;
+   wire [7:0]	       tx_byte;
+   wire		       tx_dv;
+   wire		       tx_active;
+   wire		       tx_done;
+   
    
    UART_RX #(.CLKS_PER_BIT(10416))
    usbuartrx(
@@ -44,17 +67,20 @@ module uart_top(
      .o_RX_Byte(rx_byte)
     );
 
+   assign tx_byte = 8'h43;  // C
+   //assign tx_dv = ~rx_dv;
    
-//   UART_TX #(.CLKS_PER_BIT(10416))
-//   usbuarttx(
-//     .i_Rst_L(reset),
-//     .i_Clock(CLOCK_100MHZ),
-//     .i_TX_DV,
-//     .i_TX_Byte, 
-//   output reg  o_TX_Active,
-//   output reg  o_TX_Serial,
-//   output reg  o_TX_Done
-//   );
+   
+   UART_TX #(.CLKS_PER_BIT(10416))
+   usbuarttx(
+     .i_Rst_L(~reset),
+     .i_Clock(CLOCK_100MHZ),
+     .i_TX_DV(tx_dv),
+     .i_TX_Byte(tx_byte), 
+     .o_TX_Active(tx_active),
+     .o_TX_Serial(RsTx),
+     .o_TX_Done(tx_done)
+   );
  
 
    hexout_4_digits hex_display
