@@ -1,3 +1,10 @@
+// To test uart: start Putty with COM4 (say) and baud rate 9600, stop bits = 1,
+// parity = none, flow control = none
+
+// Then anything typed should have ascii displayed in 7-seg digits.
+// Press center button to have a 'C' (ascii 0x43) sent to host.
+// Will also observe dim leds near cable connector blink during these operations.  
+
 
 module uart_top(
     input wire	       CLOCK_100MHZ, 
