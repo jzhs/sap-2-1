@@ -7,14 +7,14 @@ variable thisProject [file dirname [file dirname $thisScript]]
 
 puts "Project directory is $thisProject"
 puts "Script is $thisScript"
-puts "Called with $argc arguments"
-for {variable i 0} {$i < $argc} {incr i} {
-    puts "  Arg[$i]=[lindex $argv $i]"
-}
+# puts "Called with $argc arguments"
+# for {variable i 0} {$i < $argc} {incr i} {
+#    puts "  Arg[$i]=[lindex $argv $i]"
+# }
 
 variable op [lindex $argv 0]
 
-puts "op = $op"
+# puts "op = $op"
 
 if [expr {$op == "sim"}] {
     variable tb [lindex $argv 1]
