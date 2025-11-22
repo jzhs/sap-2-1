@@ -55,7 +55,8 @@ module uart_top(
    
 
    
-   // 100_000_000 / 115200  =  868
+   // 100_000_000 / 115200  =   868
+   // 100_000_000 / 9600    = 10416
 
    wire [7:0]	       rx_byte;
    wire		       rx_dv;
@@ -75,7 +76,7 @@ module uart_top(
     );
 
    assign tx_byte = 8'h43;  // C
-   //assign tx_dv = ~rx_dv;
+
    
    
    UART_TX #(.CLKS_PER_BIT(10416))

@@ -75,6 +75,10 @@ instruction. Instead, I will use a more typical UART protocol. As
 simple as possible. If we leave all the bells and whistles it should
 be straight-forward.
 
+I used a version of UART protocol from Russell Merrick's nandland.com website.
+
+https://nandland.com/uart-serial-port-module/
+
 
 
 # New: Larger memory
