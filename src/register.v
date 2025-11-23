@@ -2,7 +2,7 @@
 `default_nettype none 
 
 module register
-#(parameter size = 8)
+#(parameter size = 8, ival = 0)
 (
   input wire sysclk,
   input wire reset,
@@ -15,7 +15,7 @@ module register
 always @(posedge sysclk or posedge reset)
 begin
    if (reset) begin
-      value <= 0;
+      value <= ival;
    end else if (clken) begin
       if (load)
 	value <= data_in;
