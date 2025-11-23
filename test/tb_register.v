@@ -70,10 +70,13 @@ module tb_register;
       B_wr = 1;
       #10;
       A_ld = 1;
-      #4;
+      #40;
       A_ld = 0;
       B_wr = 0;
-      #80;
+      #10;
+      A_wr = 1;
+      #20;
+      
       $finish;
       
    end
