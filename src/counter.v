@@ -5,10 +5,12 @@
 module counter
   #(parameter size=16)
 (
-	    input wire	    sysclk,
-	    input wire	    reset,
-	    input wire	    clken,
-	    input wire	    incr,
+	    input wire		   sysclk,
+	    input wire		   reset,
+	    input wire		   clken,
+	    input wire		   load,
+	    input wire		   incr,
+	    input wire [size-1:0]  data_in,
 	    output wire [size-1:0] value
 );
 
@@ -23,8 +25,8 @@ module counter
 	.sysclk(sysclk),
 	.reset(reset),
 	.clken(clken),
-	.load(incr),
-	.data_in(val_p_one),
+	.load(incr | load),
+	.data_in(incr ? val_p_one : data_in),
 	.value(value)     
 	);
    
