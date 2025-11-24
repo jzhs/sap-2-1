@@ -44,11 +44,17 @@ cd to build dir
 Then ../sap-2-1/tools/sim.bat
 
 
-# Programming board
+# Programming the Board
 
 Use makebits.bat and then prog.bat
 
-# New: SERIAL IO
+
+
+# Tristate registers
+See [MB] 11-2, p173.
+
+
+# New: SERIAL IO 
 
 The first io scheme in sap-1-1 was slider switches and leds on the
 Basys3. This was usable for tiny examples only. The second io scheme
