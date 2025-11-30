@@ -107,10 +107,8 @@ module rom_top(
     .an(AN)
    );
 
-
    
    reg		       S;
-
    
    
    always @(posedge CLOCK_100MHZ) begin
@@ -124,8 +122,6 @@ module rom_top(
 	addr = addr - 1;
      end else if (S == 0) begin
 	if (rx_dv) begin
-	   
-	   
 	   rw = 1; // The mem will be written to on next clock trailing edge
 	   S = 1;
 	end

@@ -10,10 +10,18 @@ module sap2(
 
    wire [15:0]	       bus;
 
+   wire		       sel_rom;
+   wire		       sel_ram;
+   
    // Control signals
+   wire		       rw;
+   
    wire		       pc_ld;
    wire		       pc_en;
    wire		       pc_incr;
+
+   wire		       mar_ld;
+   wire [15:0]	       mar_value;
    
 
    
@@ -28,11 +36,45 @@ module sap2(
    );
 
 
+   register #(.size(16))
+   mar(
+       .sysclk(sysclk),
+       .reset(reset),
+       .clken(clken),
+       .load(mar_ld),
+       .data_in(bus),
+       .value(mar_value)
+   );
+
+   assign sel_rom = (mar_value[15:10] == 6'b000000);
+   assign sel_ram = (mar_value[15:10] == 6'b000001);
+
+   wire [7:0]	       data_out;
    
+   memory rom (
+     .clk(sysclk),
+     .sel(sel_rom),
+     .rw(rw),
+     .addr(mar_value[9:0]),
+     .data_in(),          // from 8-bit MDR
+     .data_out(data_out)  // to MDR
+   );
 
    
-   
+   memory ram (
+     .clk(sysclk),
+     .sel(sel_ram),
+     .rw(rw),
+     .addr(mar_value[9:0]),
+     .data_in(),          // from 8-bit MDR
+     .data_out(data_out)  // to MDR
+   );
 
+   tristate_register
+   mdr(
+     
+       );
+   
 
 
 endmodule

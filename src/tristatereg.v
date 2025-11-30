@@ -27,6 +27,12 @@ module tristate_register
       .value(value) 
    );
    
-   assign bus =  wr_en ? value : {size{1'bz}};
- 
+   //assign bus =  wr_en ? value : {size{1'bz}};
+   tristate_buffer #(.size(size))
+   (
+    .en(wr_en),
+    .in(value),
+    .bus(bus)
+   );
+   
 endmodule
